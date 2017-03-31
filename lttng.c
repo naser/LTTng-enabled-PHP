@@ -29,7 +29,6 @@
 #include "ext/standard/info.h"
 #include "zend_errors.h"
 #include "zend_exceptions.h"
-//#include "ext/standard/php_smart_str.h" 
 #include "ext/standard/php_string.h"    
 #include "ext/spl/spl_exceptions.h"
 
@@ -80,7 +79,6 @@ static void lttng_throw_exception_hook(zval *ex TSRMLS_DC);
 
 PHP_MINIT_FUNCTION(lttng)
 {
-    /* If you have INI entries, uncomment these lines */
     //REGISTER_INI_ENTRIES();
     
     old_compile_file = zend_compile_file;
@@ -96,7 +94,6 @@ PHP_MINIT_FUNCTION(lttng)
  */
 PHP_MSHUTDOWN_FUNCTION(lttng)
 {
-    /* uncomment this line if you have INI entries*/
     //UNREGISTER_INI_ENTRIES();
     zend_compile_file = old_compile_file;
     zend_compile_string = old_compile_string;
@@ -105,7 +102,6 @@ PHP_MSHUTDOWN_FUNCTION(lttng)
 }
 /* }}} */
 
-/* Remove if there's nothing to do at request start */
 /* {{{ PHP_RINIT_FUNCTION
  *  */
 
@@ -173,7 +169,6 @@ static void lttng_execute_ex(zend_execute_data *execute_data)
 {
     int lineno;
     const char *scope, *filename, *funcname, *classname;
-    //char *scope, *filename, *funcname, *classname;
     scope = filename = funcname = classname = NULL;
 
     /* we need filename and lineno for both execute and function probes */
@@ -186,11 +181,9 @@ static void lttng_execute_ex(zend_execute_data *execute_data)
     if (funcname != NULL){
         tracepoint(ust_php, function_entry, funcname, filename, lineno, classname,  scope);
     }
-        //tracepoint(ust_php, function_entry, (char *) funcname,(char *) filename, lineno, (char *) classname,(char *)  scope);
     execute_ex(execute_data);
     if (funcname != NULL)
         tracepoint(ust_php, function_exit, funcname, filename, lineno, classname, scope);
-        //tracepoint(ust_php, function_exit, (char *) funcname,(char *) filename, lineno, (char *) classname,(char *)  scope);
     tracepoint(ust_php, execute_exit, filename, lineno);
 
 }
