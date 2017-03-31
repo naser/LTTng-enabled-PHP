@@ -44,12 +44,11 @@ zend_module_entry lttng_module_entry = {
     STANDARD_MODULE_HEADER,
 #endif
     PHP_LTTNG_WORLD_EXTNAME,
-    //lttng_functions,
     NULL,
     PHP_MINIT(lttng), 
     PHP_MSHUTDOWN(lttng),
-    PHP_RINIT(lttng),      /* Replace with NULL if there's nothing to do at request start */
-    PHP_RSHUTDOWN(lttng),  /* Replace with NULL if there's nothing to do at request end */
+    PHP_RINIT(lttng),
+    PHP_RSHUTDOWN(lttng),
     PHP_MINFO(lttng),
 #if ZEND_MODULE_API_NO >= 20010901
     PHP_LTTNG_WORLD_VERSION,
@@ -113,7 +112,6 @@ PHP_MINFO_FUNCTION(lttng)
 
 PHP_RINIT_FUNCTION(lttng)
 {
-    
     tracepoint(ust_php, request_entry, (char *)SAFE_FILENAME(SG(request_info).path_translated), (char *)SAFE_FILENAME(SG(request_info).request_uri), (char *)SAFE_FILENAME(SG(request_info).request_method), (char *) SG(request_info).query_string);
     return SUCCESS;
 }
@@ -199,11 +197,9 @@ static void lttng_throw_exception_hook(zval *exception TSRMLS_DC)
     zval *message, *filename, *lineno;
     zend_class_entry *default_ce;
     zval *rv;
-
     if (!exception) {
         return;
     }
-
     default_ce = zend_exception_get_default(TSRMLS_C);
     message =  zend_read_property(default_ce, exception, "message", sizeof("message")-1, 0 TSRMLS_CC, rv);
     filename = zend_read_property(default_ce, exception, "filename", sizeof("filename")-1, 0 TSRMLS_CC, rv);
