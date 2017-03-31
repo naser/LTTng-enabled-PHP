@@ -36,6 +36,8 @@
 #include "lttngust_php_trace.h"
 
 #define SAFE_FILENAME(f) ((f)?(f):"-")
+#define ZSTR_VAL(zstr)  (zstr)->val
+#define ZSTR_LEN(zstr)  (zstr)->len
 
 zend_module_entry lttng_module_entry = {
 #if ZEND_MODULE_API_NO >= 20010901
@@ -59,9 +61,6 @@ zend_module_entry lttng_module_entry = {
 ZEND_GET_MODULE(lttng)
 #endif
 
-#define ZSTR_VAL(zstr)  (zstr)->val
-#define ZSTR_LEN(zstr)  (zstr)->len
-
 static void (*old_execute_ex)(zend_execute_data *execute_data);
 static void lttng_execute_ex(zend_execute_data *execute_data);
 static void (*old_execute_internal)(zend_execute_data *execute_data, zval *return_value);
@@ -75,12 +74,8 @@ static void lttng_error_cb(int type, const char *error_filename, const uint erro
 static void (*old_throw_exception_hook)(zval *ex TSRMLS_DC);
 static void lttng_throw_exception_hook(zval *ex TSRMLS_DC);
 
-
-
 PHP_MINIT_FUNCTION(lttng)
-{
-    //REGISTER_INI_ENTRIES();
-    
+{   
     old_compile_file = zend_compile_file;
     zend_compile_file = lttng_compile_file;
 
@@ -94,7 +89,6 @@ PHP_MINIT_FUNCTION(lttng)
  */
 PHP_MSHUTDOWN_FUNCTION(lttng)
 {
-    //UNREGISTER_INI_ENTRIES();
     zend_compile_file = old_compile_file;
     zend_compile_string = old_compile_string;
     
@@ -104,7 +98,6 @@ PHP_MSHUTDOWN_FUNCTION(lttng)
 
 /* {{{ PHP_RINIT_FUNCTION
  *  */
-
 PHP_RINIT_FUNCTION(lttng)
 {
     old_execute_ex = zend_execute_ex;
@@ -119,9 +112,7 @@ PHP_RINIT_FUNCTION(lttng)
     old_throw_exception_hook = zend_throw_exception_hook;
     zend_throw_exception_hook = lttng_throw_exception_hook;
     
-    
     tracepoint(ust_php, request_entry, (char *)SAFE_FILENAME(SG(request_info).path_translated), (char *)SAFE_FILENAME(SG(request_info).request_uri), (char *)SAFE_FILENAME(SG(request_info).request_method), (char *) SG(request_info).query_string);
-
     return SUCCESS;
 }
 
@@ -133,8 +124,7 @@ PHP_RSHUTDOWN_FUNCTION(lttng)
     zend_error_cb = old_error_cb;
     zend_throw_exception_hook = old_throw_exception_hook;
 
-     tracepoint(ust_php, request_exit, (char *)SAFE_FILENAME(SG(request_info).path_translated), (char *)SAFE_FILENAME(SG(request_info).request_uri), (char *)SAFE_FILENAME(SG(request_info).request_method), SG(request_info).query_string);
-
+    tracepoint(ust_php, request_exit, (char *)SAFE_FILENAME(SG(request_info).path_translated), (char *)SAFE_FILENAME(SG(request_info).request_uri), (char *)SAFE_FILENAME(SG(request_info).request_method), SG(request_info).query_string);
 }
 
 /* {{{ PHP_MINFO_FUNCTION
@@ -144,10 +134,6 @@ PHP_MINFO_FUNCTION(lttng)
     php_info_print_table_start();
     php_info_print_table_header(2, "LTTng tracing support", "enabled");
     php_info_print_table_end();
-
-    /* Remove comments if you have entries in php.ini
-    DISPLAY_INI_ENTRIES();
-    */
 }
 /* }}} */
 
@@ -170,8 +156,6 @@ static void lttng_execute_ex(zend_execute_data *execute_data)
     int lineno;
     const char *scope, *filename, *funcname, *classname;
     scope = filename = funcname = classname = NULL;
-
-    /* we need filename and lineno for both execute and function probes */
     classname = get_active_class_name(&scope);
     filename = lttng_get_executed_filename();
     funcname = get_active_function_name();
@@ -185,7 +169,6 @@ static void lttng_execute_ex(zend_execute_data *execute_data)
     if (funcname != NULL)
         tracepoint(ust_php, function_exit, funcname, filename, lineno, classname, scope);
     tracepoint(ust_php, execute_exit, filename, lineno);
-
 }
 
 static void lttng_execute_internal(zend_execute_data *execute_data,  zval *return_value)
@@ -204,9 +187,7 @@ static zend_op_array *lttng_compile_file(zend_file_handle *file_handle, int type
 {
     zend_op_array *res;
     tracepoint(ust_php, compile_file_entry, (char *)file_handle->filename, type);
-
     res = compile_file(file_handle, type);
-
     tracepoint(ust_php, compile_file_exit, (char *)file_handle->filename, type);
     return res;
 }
@@ -216,9 +197,7 @@ static zend_op_array *lttng_compile_string(zval *source_string, char *filename )
 {
     zend_op_array *res;
     tracepoint(ust_php, compile_string_entry, (char *)source_string, (char *)filename);
-
     res = compile_string(source_string, filename);
-
     tracepoint(ust_php, compile_string_exit, (char *)source_string, (char *)filename);
     return res;
 }
@@ -241,7 +220,6 @@ static void lttng_throw_exception_hook(zval *exception TSRMLS_DC)
     }
 
     default_ce = zend_exception_get_default(TSRMLS_C);
-
     message =  zend_read_property(default_ce, exception, "message", sizeof("message")-1, 0 TSRMLS_CC, rv);
     filename = zend_read_property(default_ce, exception, "filename", sizeof("filename")-1, 0 TSRMLS_CC, rv);
     lineno = zend_read_property(default_ce, exception, "lineno", sizeof("lineno")-1, 0 TSRMLS_CC, rv);
