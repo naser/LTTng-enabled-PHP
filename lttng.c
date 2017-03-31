@@ -78,39 +78,41 @@ PHP_MINIT_FUNCTION(lttng)
 {   
     old_compile_file = zend_compile_file;
     zend_compile_file = lttng_compile_file;
-
     old_compile_string = zend_compile_string;
     zend_compile_string = lttng_compile_string;
+    old_execute_ex = zend_execute_ex;
+    zend_execute_ex = lttng_execute_ex;
+    old_execute_internal = zend_execute_internal;
+    zend_execute_internal = lttng_execute_internal;
+    old_error_cb = zend_error_cb;
+    zend_error_cb = lttng_error_cb;
+    old_throw_exception_hook = zend_throw_exception_hook;
+    zend_throw_exception_hook = lttng_throw_exception_hook;
+    
     return SUCCESS;
 }
-/* }}} */
 
-/* {{{ PHP_MSHUTDOWN_FUNCTION
- */
 PHP_MSHUTDOWN_FUNCTION(lttng)
 {
     zend_compile_file = old_compile_file;
     zend_compile_string = old_compile_string;
+    zend_execute_ex = old_execute_ex;
+    zend_execute_internal = old_execute_internal;
+    zend_error_cb = old_error_cb;
+    zend_throw_exception_hook = old_throw_exception_hook;
     
     return SUCCESS;
 }
-/* }}} */
 
-/* {{{ PHP_RINIT_FUNCTION
- *  */
+PHP_MINFO_FUNCTION(lttng)
+{
+    php_info_print_table_start();
+    php_info_print_table_header(2, "LTTng tracing support", "enabled");
+    php_info_print_table_end();
+}
+
 PHP_RINIT_FUNCTION(lttng)
 {
-    old_execute_ex = zend_execute_ex;
-    zend_execute_ex = lttng_execute_ex;
-
-    old_execute_internal = zend_execute_internal;
-    zend_execute_internal = lttng_execute_internal;
-
-    old_error_cb = zend_error_cb;
-    zend_error_cb = lttng_error_cb;
-
-    old_throw_exception_hook = zend_throw_exception_hook;
-    zend_throw_exception_hook = lttng_throw_exception_hook;
     
     tracepoint(ust_php, request_entry, (char *)SAFE_FILENAME(SG(request_info).path_translated), (char *)SAFE_FILENAME(SG(request_info).request_uri), (char *)SAFE_FILENAME(SG(request_info).request_method), (char *) SG(request_info).query_string);
     return SUCCESS;
@@ -118,24 +120,8 @@ PHP_RINIT_FUNCTION(lttng)
 
 PHP_RSHUTDOWN_FUNCTION(lttng)
 {
-    zend_execute_ex = old_execute_ex;
-    zend_execute_internal = old_execute_internal;
-
-    zend_error_cb = old_error_cb;
-    zend_throw_exception_hook = old_throw_exception_hook;
-
     tracepoint(ust_php, request_exit, (char *)SAFE_FILENAME(SG(request_info).path_translated), (char *)SAFE_FILENAME(SG(request_info).request_uri), (char *)SAFE_FILENAME(SG(request_info).request_method), SG(request_info).query_string);
 }
-
-/* {{{ PHP_MINFO_FUNCTION
- */
-PHP_MINFO_FUNCTION(lttng)
-{
-    php_info_print_table_start();
-    php_info_print_table_header(2, "LTTng tracing support", "enabled");
-    php_info_print_table_end();
-}
-/* }}} */
 
 static inline const char *lttng_get_executed_filename(void)
 {
@@ -191,7 +177,6 @@ static zend_op_array *lttng_compile_file(zend_file_handle *file_handle, int type
     tracepoint(ust_php, compile_file_exit, (char *)file_handle->filename, type);
     return res;
 }
-
 
 static zend_op_array *lttng_compile_string(zval *source_string, char *filename )
 {
