@@ -1,3 +1,21 @@
+/**
+ *
+ * Copyright (C) 2017 Naser Ezzati <ezzati@gmail.com>
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+
 #undef TRACEPOINT_PROVIDER
 #define TRACEPOINT_PROVIDER ust_php
  
@@ -22,6 +40,7 @@ TRACEPOINT_EVENT(ust_php,
             ctf_string(scope, scope)
             )
         )
+ 
 TRACEPOINT_EVENT(ust_php,
         function_exit,
         TP_ARGS(const char *,funcname, const char *, filename, int, lineno, const char *,class_name, const char *, scope),
@@ -78,6 +97,7 @@ TRACEPOINT_EVENT(ust_php,
             ctf_integer(int, lineno, lineno)
            )
         )
+ 
 TRACEPOINT_EVENT(ust_php,
         execute_exit,
         TP_ARGS(const char *, filename, int, lineno),
@@ -90,7 +110,6 @@ TRACEPOINT_EVENT(ust_php,
 TRACEPOINT_EVENT(ust_php,
         request_entry,
         TP_ARGS(char *, path, char *,uri, char *,method, char *, querystring),
-        //TP_ARGS(char *, path, char *,uri, char *,method),
         TP_FIELDS(
             ctf_string(path, path)
             ctf_string(uri, uri)
@@ -130,15 +149,6 @@ TRACEPOINT_EVENT(ust_php,
             )
         )
 
-
-TRACEPOINT_EVENT(ust_php,
-        php_exception_caught,
-        TP_ARGS(char *, exception),
-        TP_FIELDS(
-            ctf_string(exception, exception)
-            )
-        )
-
 TRACEPOINT_EVENT(ust_php,
         php_exception_thrown_entry,
         TP_ARGS(char *, error, char *, filename,int, lineno),
@@ -159,40 +169,6 @@ TRACEPOINT_EVENT(ust_php,
             )   
         )
 
-TRACEPOINT_EVENT(ust_php,
-        php_mysql_connect,
-        TP_ARGS(int, connection_id, char *,user, char *, host),
-        TP_FIELDS(
-            ctf_integer(int, connection_id, connection_id)
-            ctf_string(user, user)
-            ctf_string(host, host)
-            )
-        )
-TRACEPOINT_EVENT(ust_php,
-        php_mysql_close,
-        TP_ARGS(int, connection_id, int, ret),
-        TP_FIELDS(
-            ctf_integer(int, connection_id, connection_id)
-            ctf_integer(int, ret, ret)
-            )
-        )
-TRACEPOINT_EVENT(ust_php,
-        shared_lock_start,
-        TP_ARGS(char *, filepath),
-        TP_FIELDS(
-            ctf_string(filepath, filepath)
-            )
-        )
-TRACEPOINT_EVENT(ust_php,
-        shared_lock_done,
-        TP_ARGS(char *, filepath),
-        TP_FIELDS(
-            ctf_string(filepath, filepath)
-            )
-        )
-
-
 #endif /* _UST_PHP_H */
-
 #include <lttng/tracepoint-event.h>
 
