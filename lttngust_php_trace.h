@@ -15,7 +15,6 @@
  * limitations under the License.
  */
 
-
 #undef TRACEPOINT_PROVIDER
 #define TRACEPOINT_PROVIDER ust_php
  
