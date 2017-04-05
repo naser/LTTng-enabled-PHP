@@ -1,4 +1,7 @@
 LTTng PHP tracing extension
+======
+An extesion to enable PHP requests tracing using LTTng tracer. You can trace all your php requests and extract runtime information about them. Using the Trace Compass tool you can have graphical views of Call Stack, Flame Graph, Top Requests and other interesting runtime information about your php requests.
+
 
 ## Installation
 
