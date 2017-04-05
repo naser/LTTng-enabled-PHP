@@ -17,14 +17,14 @@ You can build and install the LTTng extension from source which is straightforwa
       make
       sudo make install
       
-Currently it only supports PHP 7.x, and  LTTng >= 2.8 and the support for the other php versions will be added shortly. to install LTTng 2.9 in Ubuntu you can use these commands:
+Currently it supports PHP 7.x, and  LTTng >= 2.8. To install LTTng 2.9 in Ubuntu you can use these commands:
 
       apt-add-repository ppa:lttng/stable-2.9
       apt-get update
       apt-get install lttng-tools liblttng-ust-dev
       
        
-Also, for the php and the required dependencies, make sure you have installed php7.X-dev :
+Also, for the php, make sure you have installed php7.X-dev:
 
       apt-get install php7.0-dev  
 
