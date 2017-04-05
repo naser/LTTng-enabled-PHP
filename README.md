@@ -29,4 +29,14 @@ You can build and install the LTTng extension from source which is straightforwa
 Currently it only supports PHP 7.x, but the support for the other versions will be added shortly.
 
 
+## Usage
 
+To use this extension, you should first run LTTng and enable the lttng-ust tracing. To run LTTng run the following commands:
+
+      lttng create
+      lttng enable-channel ss -u --subbuf-size 8M;
+      lttng add-context -u -t vtid -c ss; 
+      lttng enable-event -u -a -c ss
+      lttng start
+ There is a script in the files named trace-start that you can run it to do all those above commands. 
+      
