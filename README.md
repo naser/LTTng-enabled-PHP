@@ -35,7 +35,15 @@ Now run the php -m (or php -m | grep lttng) in the command line and this time yo
 
       # To see if lttng extension is loaded
       php -m | grep lttng
-      
+ 
+ 
+ ---
+
+**Note**: You can also enable the extension temporarily using the command line:
+
+```bash
+php -d extension=lttng.so
+```
 
 ## Usage
 
