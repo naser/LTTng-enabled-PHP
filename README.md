@@ -31,6 +31,9 @@ Currently it only supports PHP 7.x, but the support for the other versions will 
 
 ## Usage
 
+
+1- Tracing:
+
 To use this extension, you should first run LTTng and enable the lttng-ust tracing. To run LTTng run the following commands:
 
       lttng create
@@ -39,4 +42,17 @@ To use this extension, you should first run LTTng and enable the lttng-ust traci
       lttng enable-event -u -a -c ss
       lttng start
  There is a script in the files named trace-start that you can run it to do all those above commands. 
+
+When you are done, just run the the following command to stop the tracing and display the outputs.
+      lttng stop 
+      lttng view
+      
+2- Analysis:
+
+To play with the resulting logs, do your analysis using a graphical interface, you can install Trace Compass (http://tracecompass.org/) and import your trace there. 
+
+It is also possible to use python codes to analyse the trace events which will be uploaded here shortly. For the moment, you can use my other project to play with the events and do your analysis: 
+https://github.com/naser/lttnganalyses-for-lampstacktraces
+
+      
       
