@@ -33,9 +33,8 @@
  ...
  
  
- /*Finally, after finishing the tracing, you should stop the trace and open the resulting events:
- 
+ /*Finally, after finishing the tracing, you should stop the trace and open the resulting events: */
+ /*
  lttng stop
  ltng view
- 
- */
+  */
