@@ -7,7 +7,8 @@ You can build and install the LTTng extension from source which is straightforwa
       git clone https://github.com/naser/LTTng-php-tracing-module.git
       cd LTTng-php-tracing-module
       phpize
-      ./configure
+      /* make sure that you have LTTng installed in your machine. For installation manual refer to: http://lttng.org/docs/v2.9/#doc-installing-lttng*/
+      ./configure     
       make
       sudo make install
 
