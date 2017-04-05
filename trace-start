@@ -21,7 +21,7 @@
  
  #!/bin/bash
 
-/*Enable LTTng events and strart tracing */
+## Enable LTTng events and strart tracing 
  lttng create
  lttng enable-channel ss -u --subbuf-size 8M;
  lttng add-context -u -t vtid -c ss; 
@@ -29,12 +29,12 @@
  lttng start
  
  
- /*Then run you php script, do your requests, commands , etc.*/
- ...
+ ##Then run you php script, do your requests, commands , etc.
+ ##...
  
  
- /*Finally, after finishing the tracing, you should stop the trace and open the resulting events: */
- /*
+ ## Finally, after finishing the tracing, you should stop the trace and open the resulting events: 
+
  lttng stop
  ltng view
   */
