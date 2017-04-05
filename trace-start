@@ -1,0 +1,18 @@
+ /*A script to enable the lttng ust tracing*/
+ 
+ lttng create
+ lttng enable-channel ss -u --subbuf-size 8M;
+ lttng add-context -u -t vtid -c ss; 
+ lttng enable-event -u -a -c ss
+ lttng start
+ 
+ 
+ /*then do you php requests, commands , etc.*/
+ ...
+ 
+ /*After doing your trace, you should stop the trace and open the resulting events:
+ 
+ lttng stop
+ ltng view
+ 
+ */
