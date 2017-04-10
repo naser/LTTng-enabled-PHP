@@ -78,7 +78,7 @@ run your php script ...
 ./trace-stop
 ```
 
-A sample output of what you would get from tracing your script is shown in
+A sample output of what you would get from tracing your script is shown in the following image:
 ![Image](sample_output_trace.png)
 
 
