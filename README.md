@@ -99,27 +99,22 @@ A sample output of what you would get from tracing your script is shown in the f
 
 As you see in the above output, different trace events are generated for your php script:
 
-Header | Header
------- | ------
-Cell   | Cell  
+| Event | Description |
+| ----- | ---------- |
+| request_entry | Fires when a request starts.	 |
+| request_exit  | Fires when a request exits.	 |
+| compile_file_entry | Fires when a file compilation starts.	 |
+| compile_file_exit | Fires when a file compilation ends. |
+| function_entry | Fires when the PHP engine calls a function/method.	 |
+| function_exit | Fires when the PHP engine returns from a function/method. |
+| execute_entry | Fires when a line code is to be executed.  |
+| execute_exit | Fires after execution of a line code.	 |
+| php_error_start | Fires just before logging a PHP error |
+| php_error_exit | Fires just after logging a PHP error  |
+| php_exception_thrown_entry| Fires just before logging a thrown PHP exception |
+| php_exception_thrown_exit |  Fires just after logging a thrown PHP exception |
+| trace_print | a PHP function that you can put in your script to output a string in the trace  |
 
-
-
-      | Event | Description |
-      | ----- | ---------- |
-      | request_entry | Fires when a request starts.	 |
-      | request_exit  | Fires when a request exits.	 |
-      | compile_file_entry | Fires when a file compilation starts.	 |
-      | compile_file_exit | Fires when a file compilation ends. |
-      | function_entry | Fires when the PHP engine calls a function/method.	 |
-      | function_exit | Fires when the PHP engine returns from a function/method. |
-      | execute_entry | Fires when a line code is to be executed.  |
-      | execute_exit | Fires after execution of a line code.	 |
-      | php_error_start | Fires just before logging a PHP error |
-      | php_error_exit | Fires just after logging a PHP error  |
-      | php_exception_thrown_entry| Fires just before logging a thrown PHP exception |
-      | php_exception_thrown_exit |  Fires just after logging a thrown PHP exception |
-      | trace_print | a PHP function that you can put in your script to output a string in the trace  |
 This module also adds a builtin function called trace_print (the last entry in the above table) to the PHP which you can call directly from your php file;
 
 <!-- language: php -->
