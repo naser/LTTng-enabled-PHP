@@ -113,7 +113,7 @@ As you see in the above output, different trace events are generated for your ph
 | php_error_exit | Fires just after logging a PHP error  |
 | php_exception_thrown_entry| Fires just before logging a thrown PHP exception |
 | php_exception_thrown_exit |  Fires just after logging a thrown PHP exception |
-| trace_print | a PHP function that you can put in your script to output a string in the trace  |
+| trace_print | A PHP function that you can call from your script to output a string in the trace  |
 
 This module also adds a builtin function called trace_print (the last entry in the above table) to the PHP which you can call directly from your php code;
 
