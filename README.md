@@ -79,6 +79,23 @@ run your php script ...
 ```
 
 A sample output of what you would get from tracing your script is shown in the following image:
+
+      [15:52:23.512328851] (+0.001567556) naserez-desktop ust_php:request_entry: { cpu_id = 4 }, { vtid = 26387 }, { path = "/usr/local/apache2/htdocs/simple.php", uri = "-", method = "-", querystring = "(null)" }
+      [15:52:23.512378022] (+0.000049171) naserez-desktop ust_php:compile_file_entry: { cpu_id = 4 }, { vtid = 26387 }, { filename = "simple.php", type = 8 }
+      [15:52:23.512404852] (+0.000026830) naserez-desktop ust_php:compile_file_exit: { cpu_id = 4 }, { vtid = 26387 }, { filename = "simple.php", type = 8 }
+      [15:52:23.512416960] (+0.000012108) naserez-desktop ust_php:execute_entry: { cpu_id = 4 }, { vtid = 26387 }, { filename = "/usr/local/apache2/htdocs/simple.php", lineno = 3 }
+      [15:52:23.512417407] (+0.000000447) naserez-desktop ust_php:function_entry: { cpu_id = 4 }, { vtid = 26387 }, { funcname = "main", filename = "/usr/local/apache2/htdocs/simple.php", lineno = 3, class_name = "", scope = "" }
+      [15:52:23.512429890] (+0.000012483) naserez-desktop ust_php:execute_entry: { cpu_id = 4 }, { vtid = 26387 }, { filename = "/usr/local/apache2/htdocs/simple.php", lineno = 3 }
+      [15:52:23.512432382] (+0.000002492) naserez-desktop ust_php:trace_print: { cpu_id = 4 }, { vtid = 26387 }, { marker = "start" }
+      [15:52:23.512433312] (+0.000000930) naserez-desktop ust_php:execute_exit: { cpu_id = 4 }, { vtid = 26387 }, { filename = "/usr/local/apache2/htdocs/simple.php", lineno = 3 }
+      [15:52:23.512441214] (+0.000007902) naserez-desktop ust_php:execute_entry: { cpu_id = 4 }, { vtid = 26387 }, { filename = "/usr/local/apache2/htdocs/simple.php", lineno = 7 }
+      [15:52:23.512441602] (+0.000000388) naserez-desktop ust_php:trace_print: { cpu_id = 4 }, { vtid = 26387 }, { marker = "end" }
+      [15:52:23.512441823] (+0.000000221) naserez-desktop ust_php:execute_exit: { cpu_id = 4 }, { vtid = 26387 }, { filename = "/usr/local/apache2/htdocs/simple.php", lineno = 7 }
+      [15:52:23.512442456] (+0.000000633) naserez-desktop ust_php:function_exit: { cpu_id = 4 }, { vtid = 26387 }, { funcname = "main", filename = "/usr/local/apache2/htdocs/simple.php", lineno = 3, class_name = "", scope = "" }
+      [15:52:23.512442803] (+0.000000347) naserez-desktop ust_php:execute_exit: { cpu_id = 4 }, { vtid = 26387 }, { filename = "/usr/local/apache2/htdocs/simple.php", lineno = 3 }
+      [15:52:23.512444673] (+0.000001870) naserez-desktop ust_php:request_exit: { cpu_id = 4 }, { vtid = 26387 }, { path = "/usr/local/apache2/htdocs/simple.php", uri = "-", method = "-", querystring = "(null)" }
+
+
 <a href="https://raw.githubusercontent.com/naser/php-LTTng-tracing-module/master/sample_output_trace.png" target="_blank"><img src="sample_output_trace.png"> </a>
 
 2- Analysis:
