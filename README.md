@@ -116,12 +116,16 @@ As you see in the above output, different trace events are generated for your ph
       | trace_print | a PHP function that you can put in your script to output a string in the trace  |
 This module also adds a builtin function called trace_print (the last entry in the above table) to the PHP which you can call directly from your php file;
 
-     ```php
+     <!-- language: php -->
+     <?php
             trace_print('step1');
-            echo 'hi ;)';
-            trace_print('step2');
             #...
-       ```
+            echo 'hi ;)';
+            #...
+            trace_print('step2');
+            
+      ?>
+      
  This function enables you to add custom markers to the output trace data and is used when you would like to get information about a block of code, to print some variable values, or to just simplyfing the reading and following of your tracing output.
 
 2- Analysis:
