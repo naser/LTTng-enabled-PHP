@@ -95,6 +95,25 @@ A sample output of what you would get from tracing your script is shown in the f
       [15:52:23.512442803] (+0.000000347) naserez-desktop ust_php:execute_exit: { cpu_id = 4 }, { vtid = 26387 }, { filename = "/usr/local/apache2/htdocs/simple.php", lineno = 3 }
       [15:52:23.512444673] (+0.000001870) naserez-desktop ust_php:request_exit: { cpu_id = 4 }, { vtid = 26387 }, { path = "/usr/local/apache2/htdocs/simple.php", uri = "-", method = "-", querystring = "(null)" }
 
+As you see in the above output, different trace events are generated for your php script:
+| Command | Description |
+| --- | --- |
+| request_entry | Generated when a request starts.	 |
+| request_exit |  |
+| compile_file_entry |  |
+| compile_file_exit |  |
+| function_entry |  |
+| function_exit |  |
+| execute_entry |  |
+| execute_exit |  |
+| php_error_start |  |
+| php_error_exit |  |
+| php_exception_thrown_entry|  |
+| php_exception_thrown_exit |  |
+| trace_print |  |
+
+
+
 This module also adds a built in function to the PHP which you can call directly from your php file;
       
       <?php
