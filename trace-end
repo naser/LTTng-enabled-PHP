@@ -4,5 +4,5 @@
  lttng stop
 
 ##  Display the generated trace
- ltng view
+ lttng view
  
