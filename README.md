@@ -109,7 +109,7 @@ As you see in the above output, different trace events are generated for your ph
 | function_exit | Fires when the PHP engine returns from a function/method. |
 | execute_entry | Fires when a line code is to be executed.  |
 | execute_exit | Fires after execution of a line code.	 |
-| php_error_start | Fires just before logging a PHP error |
+| php_error_entry | Fires just before logging a PHP error |
 | php_error_exit | Fires just after logging a PHP error  |
 | php_exception_thrown_entry| Fires just before logging a thrown PHP exception |
 | php_exception_thrown_exit |  Fires just after logging a thrown PHP exception |
