@@ -56,7 +56,6 @@ php -d extension=lttng.so
 
 ## Usage
 
-
 1- Tracing:
 
 To use this extension, you should first run LTTng and enable the lttng-ust tracing. To run LTTng run the following commands:
@@ -80,7 +79,7 @@ run your php script ...
 ```
 
 A sample output of what you would get from tracing your script is shown in
-![Alt text](sample_output_trace.png.jpg?raw=true "Sample trace output")
+![Alt text](sample_output_trace.png.jpg "Sample trace output")
 
 2- Analysis:
 
