@@ -79,7 +79,7 @@ run your php script ...
 ```
 
 A sample output of what you would get from tracing your script is shown in
-![Image](blob/master/sample_output_trace.png)
+![Image](sample_output_trace.png)
 
 
 2- Analysis:
