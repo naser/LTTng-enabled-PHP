@@ -79,7 +79,7 @@ run your php script ...
 ```
 
 A sample output of what you would get from tracing your script is shown in the following image:
-<a href='https://raw.githubusercontent.com/naser/php-LTTng-tracing-module/master/sample_output_trace.png' target='_blank'><img src="sample_output_trace.png"> </a>
+<a href="https://raw.githubusercontent.com/naser/php-LTTng-tracing-module/master/sample_output_trace.png" target="_blank"><img src="sample_output_trace.png"> </a>
 
 2- Analysis:
 
