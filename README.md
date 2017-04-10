@@ -51,7 +51,7 @@ Now run the php -m (or php -m | grep lttng) in the command line and this time yo
 **Note**: You can also enable the extension temporarily using the command line:
 
 ```bash
-php -d extension=lttng.so
+      php -d extension=lttng.so
 ```
 
 ## Usage
@@ -73,11 +73,11 @@ To use this extension, you should first run LTTng and enable the lttng-ust traci
  There are two scripts in the folder called trace-start and trace-stop that you can run to do all those above commands: 
  
 ```bash
-./trace-start
+      ./trace-start
 
-run your php script ...
+      # run your php script ...
 
-./trace-stop
+      ./trace-stop
 ```
 
 A sample output of what you would get from tracing your script is shown in the following image:
@@ -115,14 +115,12 @@ As you see in the above output, different trace events are generated for your ph
       | php_exception_thrown_exit |  Fires just after logging a thrown PHP exception |
       | trace_print | a PHP function that you can put in your script to output a string in the trace  |
 This module also adds a builtin function called trace_print (the last entry in the above table) to the PHP which you can call directly from your php file;
-      
+
      ```php
-     <?php
             trace_print('step1');
             echo 'hi ;)';
             trace_print('step2');
             #...
-      ?>
        ```
  This function enables you to add custom markers to the output trace data and is used when you would like to get information about a block of code, to print some variable values, or to just simplyfing the reading and following of your tracing output.
 
