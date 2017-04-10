@@ -99,6 +99,12 @@ A sample output of what you would get from tracing your script is shown in the f
 
 As you see in the above output, different trace events are generated for your php script:
 
+Header | Header
+------ | ------
+Cell   | Cell  
+
+
+
       | Event | Description |
       | ----- | ---------- |
       | request_entry | Fires when a request starts.	 |
