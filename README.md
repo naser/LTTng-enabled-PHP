@@ -98,7 +98,7 @@ A sample output of what you would get from tracing your script is shown in the f
 As you see in the above output, different trace events are generated for your php script:
 
       | Event | Description |
-      | --- | --- |
+      | ----- | ---------- |
       | request_entry | Fires when a request starts.	 |
       | request_exit  | Fires when a request exits.	 |
       | compile_file_entry | Fires when a file compilation starts.	 |
@@ -112,8 +112,6 @@ As you see in the above output, different trace events are generated for your ph
       | php_exception_thrown_entry| Fires just before logging a thrown PHP exception |
       | php_exception_thrown_exit |  Fires just after logging a thrown PHP exception |
       | trace_print | a PHP function that you can put in your script to output a string in the trace  |
-
-
 This module also adds a builtin function called trace_print (the last entry in the above table) to the PHP which you can call directly from your php file;
       
       <?php
