@@ -79,7 +79,7 @@ run your php script ...
 ```
 
 A sample output of what you would get from tracing your script is shown in the following image:
-<img src="sample_output_trace.png" height="200">
+<img src="sample_output_trace.png" height="300">
 
 2- Analysis:
 
