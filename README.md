@@ -66,12 +66,22 @@ To use this extension, you should first run LTTng and enable the lttng-ust traci
       lttng add-context -u -t vtid -c ss; 
       lttng enable-event -u -a -c ss
       lttng start
- There is a script in the files named trace-start that you can run it to do all those above commands. 
-
-When you are done, just run the the following command to stop the tracing and display the outputs.
-      lttng stop 
+      ... run your php code
+      lttng stop
       lttng view
-      
+ There are two scripts in the folder called trace-start and trace-stop that you can run to do all those above commands: 
+ 
+```bash
+./trace-start
+
+run your php script ...
+
+./trace-stop
+```
+
+A sample output of what you would get from tracing your script is shown in
+![Alt text](sample_output_trace.png.jpg?raw=true "Sample trace output")
+
 2- Analysis:
 
 To play with the resulting logs, do your analysis using a graphical interface, you can install Trace Compass (http://tracecompass.org/) and import your trace there. 
