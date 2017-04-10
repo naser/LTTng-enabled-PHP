@@ -96,25 +96,25 @@ A sample output of what you would get from tracing your script is shown in the f
       [15:52:23.512444673] (+0.000001870) naserez-desktop ust_php:request_exit: { cpu_id = 4 }, { vtid = 26387 }, { path = "/usr/local/apache2/htdocs/simple.php", uri = "-", method = "-", querystring = "(null)" }
 
 As you see in the above output, different trace events are generated for your php script:
-| Command | Description |
-| --- | --- |
-| request_entry | Generated when a request starts.	 |
-| request_exit |  |
-| compile_file_entry |  |
-| compile_file_exit |  |
-| function_entry |  |
-| function_exit |  |
-| execute_entry |  |
-| execute_exit |  |
-| php_error_start |  |
-| php_error_exit |  |
-| php_exception_thrown_entry|  |
-| php_exception_thrown_exit |  |
-| trace_print |  |
+
+      | Event | Description |
+      | --- | --- |
+      | request_entry | Fires when a request starts.	 |
+      | request_exit  | Fires when a request exits.	 |
+      | compile_file_entry | Fires when a file compilation starts.	 |
+      | compile_file_exit | Fires when a file compilation ends. |
+      | function_entry | Fires when the PHP engine calls a function/method.	 |
+      | function_exit | Fires when the PHP engine returns from a function/method. |
+      | execute_entry | Fires when a line code is to be executed.  |
+      | execute_exit | Fires after execution of a line code.	 |
+      | php_error_start | Fires just before logging a PHP error |
+      | php_error_exit | Fires just after logging a PHP error  |
+      | php_exception_thrown_entry| Fires just before logging a thrown PHP exception |
+      | php_exception_thrown_exit |  Fires just after logging a thrown PHP exception |
+      | trace_print | a PHP function that you can put in your script to output a string in the trace  |
 
 
-
-This module also adds a built in function to the PHP which you can call directly from your php file;
+This module also adds a builtin function called trace_print (the last entry in the above table) to the PHP which you can call directly from your php file;
       
       <?php
             trace_print('step1');
