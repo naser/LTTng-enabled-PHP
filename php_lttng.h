@@ -17,10 +17,10 @@
 
 #ifndef PHP_LTTNG_H
 #define PHP_LTTNG_H 1
-#define PHP_LTTNG_WORLD_VERSION "1.0"
+#define PHP_LTTNG_WORLD_VERSION "1.1"
 #define PHP_LTTNG_WORLD_EXTNAME "lttng"
 
-PHP_FUNCTION(hello_world);
+PHP_FUNCTION(trace_print);
 PHP_MINIT_FUNCTION(lttng);
 PHP_MSHUTDOWN_FUNCTION(lttng);
 PHP_RINIT_FUNCTION(lttng);      /* Replace with NULL if there's nothing to do at request start */

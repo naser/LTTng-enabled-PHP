@@ -168,6 +168,14 @@ TRACEPOINT_EVENT(ust_php,
             )   
         )
 
+TRACEPOINT_EVENT(ust_php,
+        trace_print,
+        TP_ARGS(char *, marker),
+        TP_FIELDS(
+            ctf_string(marker, marker)
+            )
+        )
+
 #endif /* _UST_PHP_H */
 #include <lttng/tracepoint-event.h>
 

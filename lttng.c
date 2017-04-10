@@ -27,8 +27,10 @@
 #include "php_ini.h"
 #include "SAPI.h"
 #include "ext/standard/info.h"
+#include "zend_extensions.h"
 #include "zend_errors.h"
 #include "zend_exceptions.h"
+
 #include "ext/standard/php_string.h"    
 #include "ext/spl/spl_exceptions.h"
 
@@ -39,12 +41,21 @@
 #define ZSTR_VAL(zstr)  (zstr)->val
 #define ZSTR_LEN(zstr)  (zstr)->len
 
+/* {{{ lttng_functions[]
+ *
+ */
+static zend_function_entry lttng_functions[] = {
+    PHP_FE(trace_print, NULL)
+    {NULL, NULL, NULL}
+};
+/* }}} */
+
 zend_module_entry lttng_module_entry = {
 #if ZEND_MODULE_API_NO >= 20010901
     STANDARD_MODULE_HEADER,
 #endif
     PHP_LTTNG_WORLD_EXTNAME,
-    NULL,
+    lttng_functions,
     PHP_MINIT(lttng), 
     PHP_MSHUTDOWN(lttng),
     PHP_RINIT(lttng),
@@ -119,6 +130,23 @@ PHP_RINIT_FUNCTION(lttng)
 PHP_RSHUTDOWN_FUNCTION(lttng)
 {
     tracepoint(ust_php, request_exit, (char *)SAFE_FILENAME(SG(request_info).path_translated), (char *)SAFE_FILENAME(SG(request_info).request_uri), (char *)SAFE_FILENAME(SG(request_info).request_method), SG(request_info).query_string);
+}
+
+PHP_FUNCTION(trace_print){
+    char *marker;
+    size_t marker_len;
+
+    if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &marker, &marker_len) == FAILURE) {
+        RETURN_NULL();
+    }
+
+    if (marker_len)
+        marker = estrndup(marker, marker_len);
+
+    tracepoint(ust_php, trace_print, marker);
+
+    if (marker_len)
+        efree(marker);
 }
 
 static inline const char *lttng_get_executed_filename(void)
