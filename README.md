@@ -79,7 +79,8 @@ run your php script ...
 ```
 
 A sample output of what you would get from tracing your script is shown in
-![Alt text](sample_output_trace.png.jpg "Sample trace output")
+![Image](../blob/master/sample_output_trace.png?raw=true)
+
 
 2- Analysis:
 
