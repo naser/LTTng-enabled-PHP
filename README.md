@@ -58,7 +58,7 @@ php -d extension=lttng.so
 
 1- Tracing:
 
-To use this extension, you should first run LTTng and enable the lttng-ust tracing. To run LTTng run the following commands:
+To use this extension, you should first run LTTng and enable the lttng-ust tracing. To run the LTTng do the following commands:
 
       lttng create
       lttng enable-channel ss -u --subbuf-size 8M;
@@ -95,8 +95,15 @@ A sample output of what you would get from tracing your script is shown in the f
       [15:52:23.512442803] (+0.000000347) naserez-desktop ust_php:execute_exit: { cpu_id = 4 }, { vtid = 26387 }, { filename = "/usr/local/apache2/htdocs/simple.php", lineno = 3 }
       [15:52:23.512444673] (+0.000001870) naserez-desktop ust_php:request_exit: { cpu_id = 4 }, { vtid = 26387 }, { path = "/usr/local/apache2/htdocs/simple.php", uri = "-", method = "-", querystring = "(null)" }
 
-
-<a href="https://raw.githubusercontent.com/naser/php-LTTng-tracing-module/master/sample_output_trace.png" target="_blank"><img src="sample_output_trace.png"> </a>
+This module also adds a built in function to the PHP which you can call directly from your php file;
+      
+      <?php
+            trace_print('step1');
+            echo 'hi ;)';
+            trace_print('step2');
+            #...
+      ?>
+ This function enables you to add custom markers to the output trace data and is used when you would like to get information about a block of code, to print some variable values, or to just simplyfing the reading and following of your tracing output.
 
 2- Analysis:
 
