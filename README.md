@@ -35,6 +35,10 @@ After installation you will need to add `extension=lttng.so` to your primary *ph
       # To see where .ini files are located
       php -i | grep "\.ini"
       
+      or
+      
+      php --ini
+      
 Open the php.ini with an editor , search for 'Exentions' (or 'Dynamic Extensions') within the ini file and add this line there:
       
       extension=lttng.so
