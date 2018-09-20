@@ -23,17 +23,12 @@ if test "$PHP_LTTNG" != "no"; then
      AC_DEFINE(HAVE_LTTNGUST,1,[ ])
      PHP_ADD_LIBRARY(dl, 1, LTTNG_SHARED_LIBADD)
      PHP_ADD_LIBRARY(lttng-ust, 1, LTTNG_SHARED_LIBADD)
-     PHP_ADD_LIBRARY(lttng-ust-ctl, 1, LTTNG_SHARED_LIBADD)
-     PHP_ADD_LIBRARY(lttng-ust-dl, 1, LTTNG_SHARED_LIBADD)
-     PHP_ADD_LIBRARY(lttng-ust-fork, 1, LTTNG_SHARED_LIBADD)
-     PHP_ADD_LIBRARY(lttng-ust-cyg-profile, 1, LTTNG_SHARED_LIBADD)
-     PHP_ADD_LIBRARY(lttng-ust-python-agent, 1, LTTNG_SHARED_LIBADD)
-     PHP_ADD_LIBRARY(lttng-ust-tracepoint, 1, LTTNG_SHARED_LIBADD)
+     
    ],[
      AC_MSG_ERROR([wrong lttng lib version or lib not found])
    ],[
     dnl -L$LTTNG_DIR/$PHP_LIBDIR -lm
-    -llttng-ust -ldl -llttng-ust-ctl -llttng-ust-dl -llttng-ust-fork -llttng-ust-cyg-profile -llttng-ust-python-agent -llttng-ust-tracepoint
+    -llttng-ust -ldl
    ])
   
    PHP_SUBST(LTTNG_SHARED_LIBADD)
